@@ -14,7 +14,7 @@ func Slice(word string) []string {
 
 	// Add a tab and a new line before the next word
 	re1 := regexp.MustCompile(`\\v|\\f`)
-	word = re1.ReplaceAllString(word, "$0\\n    ")
+	word = re1.ReplaceAllString(word, "$0\n    ")
 	word = re1.ReplaceAllString(word, "")
 
 	// Replace the previous words or characters
@@ -26,8 +26,9 @@ func Slice(word string) []string {
 	word = re3.ReplaceAllString(word, "")
 
 	// Handle new line, both \n and \\n
-	re4 := regexp.MustCompile(`\\n`)
-	word = re4.ReplaceAllLiteralString(word, "\n")
+	// re4 := regexp.MustCompile(`\\n`)
+	// word = re4.ReplaceAllLiteralString(word, "\n")
+	word = strings.ReplaceAll(word, "\\n", "\n")
 	wordArr := strings.Split(word, "\n")
 
 	return wordArr
