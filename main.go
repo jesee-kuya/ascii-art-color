@@ -27,18 +27,22 @@ func main() {
 	}
 	colorize := false
 	*colorFlag = strings.ToLower(*colorFlag)
+	if strings.Contains(*colorFlag, "") {
+		colorize = true
+	}
 	for _, v := range Color {
 		if strings.Contains(*colorFlag, v) && v != "" {
 			*colorFlag = v
-			colorize = true
-		} else if strings.Contains(*colorFlag, v) && v == "" {
-			*colorFlag = "reset"
 			colorize = true
 		}
 	}
 	switch colorize {
 	case true:
 		check := flag.Args()
+		if len(check) < 1 {
+			fmt.Println("Usage: go run . --color=<color> <letters to be colored>")
+			return
+		}
 		letter := check[0]
 		if len(check) > 1 {
 			word := ascii.Arrange(check[1:])
