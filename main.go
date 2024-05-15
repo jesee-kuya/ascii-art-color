@@ -9,7 +9,7 @@ import (
 	ascii "ascii/ascii"
 )
 
-var Color = []string{"black", "red", "green", "yellow", "blue", "magenta"}
+var Color = []string{"black", "red", "green", "yellow", "blue", "magenta", ""}
 
 func main() {
 	colorFlag := flag.String("color", "reset", "color the command line output")
@@ -25,22 +25,37 @@ func main() {
 		fmt.Println(error)
 		return
 	}
+	colorize := false
 	*colorFlag = strings.ToLower(*colorFlag)
 	for _, v := range Color {
-		if strings.Contains(*colorFlag, v) {
+		if strings.Contains(*colorFlag, v) && v != "" {
 			*colorFlag = v
+			colorize = true
+		} else if strings.Contains(*colorFlag, v) && v == "" {
+			*colorFlag = "reset"
+			colorize = true
 		}
 	}
-	check := flag.Args()
-	if *colorFlag != "reset" {
+	switch colorize {
+	case true:
+		check := flag.Args()
 		letter := check[0]
-		word := ascii.Arrange(words[3:])
-		wordsArr := ascii.Slice(word)
-		if !ascii.CheckAscii(wordsArr) {
-			return
+		if len(check) > 1 {
+			word := ascii.Arrange(check[1:])
+			wordsArr := ascii.Slice(word)
+			if !ascii.CheckAscii(wordsArr) {
+				return
+			}
+			ascii.Ascii(content, wordsArr, *colorFlag, letter)
+		} else {
+			word := ascii.Arrange(check[0:])
+			wordsArr := ascii.Slice(word)
+			if !ascii.CheckAscii(wordsArr) {
+				return
+			}
+			ascii.Ascii(content, wordsArr, *colorFlag, letter)
 		}
-		ascii.Ascii(content, wordsArr, *colorFlag, letter)
-	} else {
+	default:
 		letter := ""
 		word := ascii.Arrange(words[1:])
 		wordsArr := ascii.Slice(word)
