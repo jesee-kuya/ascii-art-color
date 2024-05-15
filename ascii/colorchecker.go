@@ -5,11 +5,11 @@ import (
 )
 
 func ColorValue(value string, Col []string) string {
-	if strings.Contains(value, "-b") {
+	if strings.Contains(value, "-bright") {
 		return Col[0]
-	} else if strings.Contains(value, "-d") {
+	} else if strings.Contains(value, "-dark") {
 		return Col[1]
-	} else if strings.Contains(value, "-h") {
+	} else if strings.Contains(value, "-highlight") {
 		return Col[2]
 	} else {
 		return Col[3]
