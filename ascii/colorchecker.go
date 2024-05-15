@@ -1,5 +1,6 @@
 package ascii
 
+<<<<<<< HEAD
 import (
 	"strings"
 )
@@ -49,4 +50,9 @@ func ColorChecker(color string, data map[string][]string) string {
 	default:
 		return "\033[0m"
 	}
+=======
+func ColorChecker(color string, data map[string]string) string {
+	value := data[color]
+	return (value)
+>>>>>>> jesee
 }
