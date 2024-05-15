@@ -44,26 +44,37 @@ func main() {
 		return
 	}
 
-	paint := ascii.ColorChecker(colorflag, Colormap)
+	if ascii.IsFlagPassed("color") {
 
-	if len(words) == 1 {
+		paint := ascii.ColorChecker(colorflag, Colormap)
+
+		if len(words) == 1 {
+			word := ascii.Arrange(words)
+			wordsArr := ascii.Slice(word)
+			if !ascii.CheckAscii(wordsArr) {
+				return
+			}
+			ascii.Ascii(content, wordsArr, option, paint)
+		} else if len(words) == 2 {
+			option = append(option, words[0])
+			word := ascii.Arrange(words[1:])
+			wordsArr := ascii.Slice(word)
+			if !ascii.CheckAscii(wordsArr) || !ascii.CheckAscii(option) {
+				return
+			}
+			ascii.Ascii(content, wordsArr, option, paint)
+
+		} else {
+			fmt.Println("error with number of arguments")
+			return
+		}
+	} else {
+		paint := ""
 		word := ascii.Arrange(words)
 		wordsArr := ascii.Slice(word)
 		if !ascii.CheckAscii(wordsArr) {
 			return
 		}
 		ascii.Ascii(content, wordsArr, option, paint)
-	} else if len(words) == 2 {
-		option = append(option, words[0])
-		word := ascii.Arrange(words[1:])
-		wordsArr := ascii.Slice(word)
-		if !ascii.CheckAscii(wordsArr) || !ascii.CheckAscii(option) {
-			return
-		}
-		ascii.Ascii(content, wordsArr, option, paint)
-
-	} else {
-		fmt.Println("error with number of arguments")
-		return
 	}
 }
