@@ -34,7 +34,7 @@ func main() {
 	var colorflag string
 	var option []string
 	flag.StringVar(&filename, "filename", "standard", "name for the files")
-	flag.StringVar(&colorflag, "color", "normal", "color for color input")
+	flag.StringVar(&colorflag, "color", "reset", "color for color input")
 	flag.Parse()
 	words := flag.Args()
 
@@ -49,32 +49,16 @@ func main() {
 		paint := ascii.ColorChecker(colorflag, Colormap)
 
 		if len(words) == 1 {
-			word := ascii.Arrange(words)
-			wordsArr := ascii.Slice(word)
-			if !ascii.CheckAscii(wordsArr) {
-				return
-			}
-			ascii.Ascii(content, wordsArr, option, paint)
+			ascii.Art(words, content, option, paint, 0)
 		} else if len(words) == 2 {
 			option = append(option, words[0])
-			word := ascii.Arrange(words[1:])
-			wordsArr := ascii.Slice(word)
-			if !ascii.CheckAscii(wordsArr) || !ascii.CheckAscii(option) {
-				return
-			}
-			ascii.Ascii(content, wordsArr, option, paint)
-
+			ascii.Art(words, content, option, paint, 1)
 		} else {
-			fmt.Println("error with number of arguments")
+			fmt.Println("Usage: go run . --color=<color> <letters to be colored> \"something\"")
 			return
 		}
 	} else {
 		paint := ""
-		word := ascii.Arrange(words)
-		wordsArr := ascii.Slice(word)
-		if !ascii.CheckAscii(wordsArr) {
-			return
-		}
-		ascii.Ascii(content, wordsArr, option, paint)
+		ascii.Art(words, content, option, paint, 0)
 	}
 }
