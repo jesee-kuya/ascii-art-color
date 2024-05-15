@@ -3,7 +3,6 @@ package main
 import (
 	"flag"
 	"fmt"
-	"strings"
 
 	"ascii/ascii"
 )
@@ -46,7 +45,6 @@ func main() {
 	}
 
 	if ascii.IsFlagPassed("color") {
-<<<<<<< HEAD
 
 		paint := ascii.ColorChecker(colorflag, Colormap)
 
@@ -59,29 +57,6 @@ func main() {
 			fmt.Println("Usage: go run . --color=<color> <letters to be colored> \"something\"")
 			return
 		}
-=======
-		var test string
-		colorflag = strings.ToLower(colorflag)
-
-		_, ok := Colormap[colorflag]
-		if !ok {
-			fmt.Println("Usage: go run . --color=<color> <letters to be colored> \"something\"")
-			return
-		}
-		colorflag = test + colorflag
-
-		paint := ascii.ColorChecker(colorflag, Colormap)
-
-		if len(words) == 1 {
-			ascii.Art(words, content, option, paint, 0)
-		} else if len(words) == 2 {
-			option = append(option, words[0])
-			ascii.Art(words, content, option, paint, 1)
-		} else {
-			fmt.Println("Usage: go run . --color=<color> <letters to be colored> \"something\"")
-			return
-		}
->>>>>>> jesee
 	} else {
 		paint := ""
 		ascii.Art(words, content, option, paint, 0)
