@@ -2,7 +2,6 @@ package ascii
 
 import "fmt"
 
-
 // CheckAscii checks if the input words contain any non-ASCII characters
 func CheckAscii(word []string) bool {
 	for _, v := range word {

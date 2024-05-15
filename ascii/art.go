@@ -1,10 +1,10 @@
 package ascii
 
-func Art(check []string, content []string, flag string, letter string, n int) {
-	word := Arrange(check[n:])
+func Art(words []string, content []string, option []string, paint string, n int) {
+	word := Arrange(words[n:])
 	wordsArr := Slice(word)
 	if !CheckAscii(wordsArr) {
 		return
 	}
-	Ascii(content, wordsArr, flag, letter)
+	Ascii(content, wordsArr, option, paint)
 }
