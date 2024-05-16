@@ -3,12 +3,12 @@ package main
 import (
 	"flag"
 	"fmt"
+	"strings"
 
 	"ascii/ascii"
 )
 
 func main() {
-
 	Colormap := map[string]string{
 		"yellow":  "\033[33;1m",
 		"red":     "\033[31;1m",
@@ -24,10 +24,11 @@ func main() {
 		"brown":   "\033[38;2;165;42;42m",
 		"pink":    "\033[38;2;255;192;203m",
 		"gold":    "\033[38;2;255;215;0m",
-		"silver": "\033[38;2;192;192;192m",
-		"violet": "\033[38;2;238;130;238m",
+		"silver":  "\033[38;2;192;192;192m",
+		"violet":  "\033[38;2;238;130;238m",
 		"maroon":  "\033[38;2;128;0;0m",
-		"navy": "\033[38;2;0;0;128m",
+		"navy":    "\033[38;2;0;0;128m",
+		"olive": "\033[38;2;128;128;0m",
 	}
 
 	var filename string
@@ -45,6 +46,13 @@ func main() {
 	}
 
 	if ascii.IsFlagPassed("color") {
+		colorflag = strings.ToLower(colorflag)
+
+		_, ok := Colormap[colorflag]
+		if !ok {
+			fmt.Printf("%v is not available\n ", colorflag)
+			return
+		}
 
 		paint := ascii.ColorChecker(colorflag, Colormap)
 
