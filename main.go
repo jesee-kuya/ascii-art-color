@@ -33,14 +33,15 @@ func main() {
 
 	var filename string
 	var colorflag string
-	var option []string
+	var letterToColor string
 	var str string
+	var paint string
 	flag.StringVar(&filename, "filename", "standard", "name for the files")
 	flag.StringVar(&colorflag, "color", "reset", "color for color input")
 	flag.Parse()
 	words := flag.Args()
 
-	content, err := ascii.GetFileName(filename)
+	bannerContent, err := ascii.GetFileName(filename)
 	if err != nil {
 		fmt.Println(err)
 		return
@@ -62,7 +63,7 @@ func main() {
 				return
 			}
 		}
-		var paint string
+		
 		if str == "" {
 			paint = ascii.ColorChecker(colorflag, Colormap)
 		} else {
@@ -70,16 +71,16 @@ func main() {
 		}
 
 		if len(words) == 1 {
-			ascii.Art(words, content, option, paint, 0)
+			ascii.Art(words, bannerContent, letterToColor, paint, 0)
 		} else if len(words) == 2 {
-			option = append(option, words[0])
-			ascii.Art(words, content, option, paint, 1)
+			letterToColor =  words[0]
+			ascii.Art(words, bannerContent, letterToColor, paint, 1)
 		} else {
 			fmt.Println("Usage: go run . --color=<color> <letters to be colored> \"something\"")
 			return
 		}
 	} else {
 		paint := ""
-		ascii.Art(words, content, option, paint, 0)
+		ascii.Art(words, bannerContent, letterToColor, paint, 0)
 	}
 }
