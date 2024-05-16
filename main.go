@@ -28,12 +28,13 @@ func main() {
 		"violet":  "\033[38;2;238;130;238m",
 		"maroon":  "\033[38;2;128;0;0m",
 		"navy":    "\033[38;2;0;0;128m",
-		"olive": "\033[38;2;128;128;0m",
+		"olive":   "\033[38;2;128;128;0m",
 	}
 
 	var filename string
 	var colorflag string
 	var option []string
+	var str string
 	flag.StringVar(&filename, "filename", "standard", "name for the files")
 	flag.StringVar(&colorflag, "color", "reset", "color for color input")
 	flag.Parse()
@@ -50,11 +51,23 @@ func main() {
 
 		_, ok := Colormap[colorflag]
 		if !ok {
-			fmt.Printf("%v is not available\n ", colorflag)
-			return
+			if strings.Contains(colorflag, "rgb") {
+				str, err = ascii.Rgb(colorflag)
+				if err != nil {
+					fmt.Println(err)
+					return
+				}
+			} else {
+				fmt.Printf("The color %v is not yet defined. Try another color.\n", colorflag)
+				return
+			}
 		}
-
-		paint := ascii.ColorChecker(colorflag, Colormap)
+		var paint string
+		if str == "" {
+			paint = ascii.ColorChecker(colorflag, Colormap)
+		} else {
+			paint = str
+		}
 
 		if len(words) == 1 {
 			ascii.Art(words, content, option, paint, 0)
