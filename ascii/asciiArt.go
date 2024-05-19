@@ -14,9 +14,9 @@ func Ascii(fileArr []string, wordsArr []string, letterToColor string, color stri
 			for i := 1; i <= 8; i++ {
 				for _, v := range val {
 					start := (v - 32) * 9
-					if len(letterToColor) == 0 {
+					if len(opt) == 0 {
 						fmt.Print(color + fileArr[int(start)+i] + reset)
-					} else if strings.Contains(letterToColor, string(v)) {
+					} else if strings.Contains(opt, string(v)) {
 						fmt.Print(color + fileArr[int(start)+i] + reset)
 					} else {
 						fmt.Print(fileArr[int(start)+i])
