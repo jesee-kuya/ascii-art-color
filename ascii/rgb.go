@@ -19,11 +19,14 @@ func RgbToAnsi(rgb RGB) string {
 
 func Rgb(colorflag string) (string, error) {
 	rgb := RGB{}
+	colorflag = strings.ReplaceAll(colorflag, " ", "")
 	colorflag = strings.Trim(colorflag, "rgb")
 	colorflag = strings.Trim(colorflag, "()")
 	arr := strings.Split(colorflag, ",")
 	if len(arr) != 3 {
 		return "", errors.New("the rgb code entered is not correctly formatted")
+	} else if strings.Contains(colorflag, "=") {
+		return "", errors.New("usage: go run . --color=<color> <letters to be colored> \"something\"")
 	}
 	for i, v := range arr {
 		num, err := strconv.Atoi(v)
