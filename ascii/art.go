@@ -9,5 +9,5 @@ func Art(words []string, content []string, option []string, paint string, index 
 	if !CheckAscii(wordsArr) {
 		return
 	}
-	Ascii(bannerContent, wordsArr, letterToColor, paint)
+	Ascii(content, wordsArr, option, paint)
 }

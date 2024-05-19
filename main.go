@@ -25,39 +25,9 @@ func main() {
 	}
 
 	if ascii.IsFlagPassed("color") {
-		colorflag = strings.ToLower(colorflag)
-
-		_, ok := Colormap[colorflag]
-		if !ok {
-			if strings.Contains(colorflag, "rgb") {
-				str, err = ascii.Rgb(colorflag)
-				if err != nil {
-					fmt.Println(err)
-					return
-				}
-			} else {
-				fmt.Printf("The color %v is not yet defined. Try another color.\n", colorflag)
-				return
-			}
-		}
-		var paint string
-		if str == "" {
-			paint = ascii.ColorChecker(colorflag, Colormap)
-		} else {
-			paint = str
-		}
-
-		if len(words) == 1 {
-			ascii.Art(words, content, option, paint, 0)
-		} else if len(words) == 2 {
-			option = append(option, words[0])
-			ascii.Art(words, content, option, paint, 1)
-		} else {
-			fmt.Println("Usage: go run . --color=<color> <letters to be colored> \"something\"")
-			return
-		}
+		ascii.Color(colorflag, lettersTocolor, words, bannerContent)
 	} else {
-		paint := ""
-		ascii.Art(words, content, option, paint, 0)
+		paint = ""
+		ascii.Art(words, bannerContent, lettersTocolor, paint, 0)
 	}
 }
