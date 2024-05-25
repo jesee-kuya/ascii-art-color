@@ -1,9 +1,10 @@
 package ascii
 
-// Arrange converts the input to one string
+// Arrange converts a slice of strings into a single string.
 func Arrange(words []string) string {
-	word := ""
+	var word string
 	for i, v := range words {
+		// If it's not the first word, add a space before the word.
 		if i != 0 {
 			word += " " + string(v)
 		} else {
