@@ -38,13 +38,13 @@ func main() {
 	var colorflag string
 	var lettersToColor string
 	var str string
-	var paint string
+	var colorCode string
 
 	// Define command-line flags
 	flag.StringVar(&filename, "filename", "standard", "name for the files")
 	flag.StringVar(&colorflag, "color", "reset", "color for color input")
 	flag.Parse()
-	words := flag.Args()
+	argsPassed := flag.Args()
 
 	// Get the content of the banner file
 	bannerFileContent, err := ascii.GetFileName(filename)
@@ -74,24 +74,24 @@ func main() {
 
 		// Check if the letters to be colored is passed in the command line
 		if str == "" {
-			paint = ascii.ColorChecker(colorflag, Colormap)
+			colorCode = Colormap[colorflag]  //ascii.ColorChecker(colorflag, Colormap)
 		} else {
-			paint = str
+			colorCode = str
 		}
 
 		// Generate ASCII art
-		if len(words) == 1 {
-			ascii.Art(words, bannerFileContent, lettersToColor, paint, 0)
-		} else if len(words) == 2 {
-			lettersToColor += words[0]
-			ascii.Art(words, bannerFileContent, lettersToColor, paint, 1)
+		if len(argsPassed) == 1 {
+			ascii.Art(argsPassed, bannerFileContent, lettersToColor, colorCode, 0)
+		} else if len(argsPassed) == 2 {
+			lettersToColor += argsPassed[0]
+			ascii.Art(argsPassed, bannerFileContent, lettersToColor, colorCode, 1)
 		} else {
 			fmt.Println("Usage: go run . --color=<color> <letters to be colored> \"something\"")
 			return
 		}
 		// If the flag is not passed print the default color
 	} else {
-		paint := ""
-		ascii.Art(words, bannerFileContent, lettersToColor, paint, 0)
+		colorCode := ""
+		ascii.Art(argsPassed, bannerFileContent, lettersToColor, colorCode, 0)
 	}
 }

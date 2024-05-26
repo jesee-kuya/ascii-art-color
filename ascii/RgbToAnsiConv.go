@@ -13,10 +13,7 @@ type RGB struct {
 	B int
 }
 
-
-
 // RgbToAnsiConv converts an RGB color to an ANSI escape sequence.
-// The ANSI escape sequence is used to set the foreground color of the terminal.
 // The function takes a string representing an RGB color in the format "rgb(R, G, B)"
 // where R, G, and B are integers between 0 and 255.
 // It returns a string that represents the ANSI escape sequence.
@@ -43,14 +40,19 @@ func RgbToAnsiConv(colorflag string) (string, error) {
 			return "", errors.New("the rgb code is wrong. use rgb(r, g, b) format")
 		}
 		// Assign the integer to the corresponding field of the RGB struct.
-		if i == 0 && num <= 255 {
-			rgb.R = num
-		} else if i == 1 && num <= 255 {
-			rgb.G = num
-		} else if i == 2 && num <= 255 {
-			rgb.B = num
+		if num >= 0 && num <= 255 {
+			switch i {
+			case 0:
+				rgb.R = num
+			case 1:
+				rgb.G = num
+			case 2:
+				rgb.B = num
+			default:
+				return "", errors.New("the rgb code is wrong. use rgb(r, g, b) format")
+			}
 		} else {
-			return "", errors.New("the rgb code is wrong. use rgb(r, g, b) format")
+			return "", errors.New("the RGB value should be between 0 and 255")
 		}
 	}
 	// Convert the RGB struct to an ANSI escape sequence and return it.
