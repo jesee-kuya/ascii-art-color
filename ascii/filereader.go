@@ -6,7 +6,8 @@ import (
 	"strings"
 )
 
-// Reader reads the banner file and returns a slice of string
+// Reader reads the banner file and splits it into a slice of strings
+// using the separator provided. It returns an error and slice of strings
 func Reader(filename string, sepp string) ([]string, error) {
 	file, err := os.ReadFile(filename)
 	if err != nil {

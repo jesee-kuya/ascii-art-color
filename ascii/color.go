@@ -36,7 +36,7 @@ func Color(colorflag string, lettersTocolor []string, words []string, bannerCont
 	_, ok := Colormap[colorflag]
 	if !ok {
 		if strings.Contains(colorflag, "rgb") {
-			str, err = Rgb(colorflag)
+			str, err = RgbToAnsiConv(colorflag)
 			if err != nil {
 				fmt.Println(err)
 				return

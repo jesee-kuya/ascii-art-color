@@ -5,6 +5,13 @@ import (
 	"strings"
 )
 
+
+// Ascii prints ASCII art from a given array of characters.
+// The characters are extracted from a predefined file array.
+// The function takes in four arguments: fileArr (a slice of strings representing the file array),
+// wordsArr (a slice of strings representing the words to be printed),
+// lettersToColor (a string representing the letters to be colored),
+// and color (a string representing the color to be applied).
 func Ascii(fileArr []string, wordsArr []string, option []string, color string) {
 	var count int
 	reset := "\033[0m"

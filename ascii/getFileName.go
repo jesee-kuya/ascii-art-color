@@ -5,6 +5,9 @@ import (
 	"strings"
 )
 
+// GetFileName retrieves the content of a specified ASCII art file.
+// It takes the name of the file as a parameter and returns the content of the file
+// as a slice of strings and an error if the file is not found or cannot be read.
 func GetFileName(name string) ([]string, error) {
 	if strings.ToLower(name) == "thinkertoy" || strings.ToLower(name) == "thinkertoy.txt" {
 		content, error := Reader("thinkertoy.txt", "\r\n")
