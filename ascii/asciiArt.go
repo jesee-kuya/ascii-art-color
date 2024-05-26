@@ -25,7 +25,7 @@ func Ascii(fileArr []string, wordsArr []string, lettersToColor string, color str
 					if len(lettersToColor) == 0 {
 						fmt.Print(color + fileArr[int(start)+i] + reset)
 
-						// If the character is in lettersToColor, apply the color
+					// If the character is in lettersToColor, apply the color
 					} else if strings.Contains(lettersToColor, string(v)) {
 						fmt.Print(color + fileArr[int(start)+i] + reset)
 
