@@ -63,7 +63,7 @@ func Color(colorflag string, lettersTocolor []string, words []string, bannerCont
 	}
 
 	if str == "" {
-		paint = ColorChecker(colorflag, Colormap)
+		paint = Colormap[colorflag]
 	} else {
 		paint = str
 	}

@@ -48,6 +48,6 @@ var testCases = []struct {
 
 	func TestArt(t *testing.T) {
 		for _, tc := range testCases {
-			t.Run(tc.testName, func(t*testing.T) {)
+			t.Run(tc.testName, func(t*testing.T) )
 		}
 	}
