@@ -147,9 +147,13 @@ git commit -am 'Add new feature
 ```sh
 git push origin feature-branch
 ```
-5. **Open a pull request**
+6. **Open a pull request**
 
 ## License
 
 This project is licensed under the MIT License. See the [LICENSE]( https://github.com/jesee-kuya/ascii-art-color.git/main/LICENSE)  file for details.
 
+Brought to you by [Jesee-kuya](https://github.com/jesee-kuya) , [James](https://github.com/j1mmy7z7) and [Fena][def]
+
+
+[def]: https://github.com/konditi1
